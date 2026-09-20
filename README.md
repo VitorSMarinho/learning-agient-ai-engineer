@@ -15,21 +15,19 @@ Do fundamento ao deploy: RAG, Agentes, OCR, Fine-Tuning.
 
 ## Módulos
 
-| # | Módulo | Status |
-|---|--------|--------|
-| 01 | [Fundamentos da Engenharia de IA](modulos/01-fundamentos-engenharia-ia/) | projeto disponível |
-| 02 | [Python Moderno e FastAPI](modulos/02-python-moderno-fastapi/) | conteúdo disponível |
-| 03 | [Bancos SQL + Vetoriais](modulos/03-bancos-sql-vetoriais/) | conteúdo disponível |
-| 04 | [Sistemas RAG completos](modulos/04-sistemas-rag-completos/) | conteúdo disponível |
-| 05 | [RAG Agents — LangChain vs LlamaIndex](modulos/05-rag-agents-langchain-llamaindex/) | conteúdo disponível |
-| 06 | [Graph RAG — Knowledge Graphs](modulos/06-graph-rag-knowledge-graphs/) | conteúdo disponível |
-| 07 | [Sistemas de Agentes de IA](modulos/07-sistemas-agentes-ia/) | conteúdo disponível |
-| 08 | [LangGraph — orquestração real](modulos/08-langgraph-orquestracao/) | conteúdo disponível |
-| 09 | [Multi-Agent Systems](modulos/09-multi-agent-systems/) | conteúdo disponível |
-| 10 | [OCR Pipelines](modulos/10-ocr-pipelines/) | conteúdo disponível |
-| 11 | [Modelos Locais (Ollama, vLLM)](modulos/11-modelos-locais-ollama-vllm/) | conteúdo disponível |
-| 12 | [Fine-Tuning (LoRA, PEFT, Unsloth)](modulos/12-fine-tuning-lora-peft-unsloth/) | conteúdo disponível |
+Todos os 12 módulos têm projeto prático completo — pronto pra resolver e submeter via PR.
 
-"Conteúdo disponível" = objetivo/conceitos/recursos prontos, projeto prático ainda em
-detalhamento incremental. "Projeto disponível" = módulo completo, pronto pra resolver e
-submeter via PR.
+| # | Módulo |
+|---|--------|
+| 01 | [Fundamentos da Engenharia de IA](modulos/01-fundamentos-engenharia-ia/) |
+| 02 | [Python Moderno e FastAPI](modulos/02-python-moderno-fastapi/) |
+| 03 | [Bancos SQL + Vetoriais](modulos/03-bancos-sql-vetoriais/) |
+| 04 | [Sistemas RAG completos](modulos/04-sistemas-rag-completos/) |
+| 05 | [RAG Agents — LangChain vs LlamaIndex](modulos/05-rag-agents-langchain-llamaindex/) |
+| 06 | [Graph RAG — Knowledge Graphs](modulos/06-graph-rag-knowledge-graphs/) |
+| 07 | [Sistemas de Agentes de IA](modulos/07-sistemas-agentes-ia/) |
+| 08 | [LangGraph — orquestração real](modulos/08-langgraph-orquestracao/) |
+| 09 | [Multi-Agent Systems](modulos/09-multi-agent-systems/) |
+| 10 | [OCR Pipelines](modulos/10-ocr-pipelines/) |
+| 11 | [Modelos Locais (Ollama, vLLM)](modulos/11-modelos-locais-ollama-vllm/) |
+| 12 | [Fine-Tuning (LoRA, PEFT, Unsloth)](modulos/12-fine-tuning-lora-peft-unsloth/) |
