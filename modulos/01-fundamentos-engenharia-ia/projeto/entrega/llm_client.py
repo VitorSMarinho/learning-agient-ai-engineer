@@ -4,8 +4,15 @@ from __future__ import annotations
 import os
 from typing import Literal
 
+import anthropic
 from pydantic import BaseModel, ValidationError
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
+
+FALHAS_RECUPERAVEIS_API = (
+    anthropic.APITimeoutError,
+    anthropic.APIConnectionError,
+    anthropic.RateLimitError,
+)
 
 
 class RespostaLLMInvalida(Exception):
@@ -23,8 +30,6 @@ def _modelo_configurado() -> str:
 
 def _chamar_api_anthropic(texto: str) -> str:
     """Faz a chamada de rede de verdade. Isolada pra poder ser mockada nos testes."""
-    import anthropic
-
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         raise RuntimeError("ANTHROPIC_API_KEY nao configurada (veja .env.example)")
@@ -46,7 +51,7 @@ def _chamar_api_anthropic(texto: str) -> str:
 @retry(
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=1, min=1, max=10),
-    retry=retry_if_exception_type((TimeoutError, ConnectionError)),
+    retry=retry_if_exception_type(FALHAS_RECUPERAVEIS_API),
     reraise=True,
 )
 def classificar_sentimento(texto: str) -> Sentimento:

@@ -13,7 +13,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from llm_client import RespostaLLMInvalida, classificar_sentimento
+from llm_client import FALHAS_RECUPERAVEIS_API, RespostaLLMInvalida, classificar_sentimento
 
 
 def processar_arquivo(caminho_entrada: Path, caminho_saida: Path) -> int:
@@ -45,7 +45,7 @@ def processar_arquivo(caminho_entrada: Path, caminho_saida: Path) -> int:
         except RespostaLLMInvalida as exc:
             falhas += 1
             print(f"aviso: resposta invalida do modelo pra {texto!r}: {exc}", file=sys.stderr)
-        except (TimeoutError, ConnectionError, RuntimeError) as exc:
+        except (*FALHAS_RECUPERAVEIS_API, RuntimeError) as exc:
             falhas += 1
             print(f"aviso: falha ao classificar {texto!r}: {exc}", file=sys.stderr)
 

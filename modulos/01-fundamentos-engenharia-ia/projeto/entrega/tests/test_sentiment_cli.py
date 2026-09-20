@@ -1,11 +1,36 @@
 import csv
 from unittest.mock import patch
 
+import anthropic
 import pytest
 
 import llm_client
 import sentiment_cli
 from llm_client import RespostaLLMInvalida, Sentimento, classificar_sentimento
+
+
+def _erro_conexao():
+    return anthropic.APIConnectionError(request=None)
+
+
+def test_classificar_sentimento_repete_apos_falha_real_de_api(monkeypatch):
+    """A falha real que o SDK anthropic levanta (nao TimeoutError/ConnectionError builtin)
+    precisa acionar o retry, nao derrubar a chamada na primeira tentativa."""
+    respostas = [
+        _erro_conexao(),
+        '{"classificacao": "neutro", "justificativa": "recuperou na 2a tentativa"}',
+    ]
+
+    def _fake_chamada(texto):
+        proxima = respostas.pop(0)
+        if isinstance(proxima, Exception):
+            raise proxima
+        return proxima
+
+    monkeypatch.setattr(llm_client, "_chamar_api_anthropic", _fake_chamada)
+    resultado = classificar_sentimento("texto qualquer")
+    assert resultado.classificacao == "neutro"
+    assert respostas == []
 
 
 def test_classificar_sentimento_caminho_feliz(monkeypatch):
