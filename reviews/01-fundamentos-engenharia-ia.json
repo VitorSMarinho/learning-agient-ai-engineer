@@ -1,0 +1,55 @@
+{
+  "modulo_id": "ia-01-fundamentos-engenharia-ia",
+  "pr_number": 2,
+  "reviewer_agent": "python-reviewer",
+  "status": "aprovado",
+  "criterios": [
+    {
+      "descricao": "Sem segredo hardcoded",
+      "atendido": true,
+      "comentario": ".env.example sem valor real; chave sempre lida via os.environ.get."
+    },
+    {
+      "descricao": "Config por variável de ambiente",
+      "atendido": true,
+      "comentario": "ANTHROPIC_API_KEY e ANTHROPIC_MODEL lidos de env, load_dotenv() chamado antes de tudo."
+    },
+    {
+      "descricao": "Saída validada por schema",
+      "atendido": true,
+      "comentario": "Sentimento(BaseModel) com Literal; resposta fora do schema vira RespostaLLMInvalida, tratada sem derrubar o loop."
+    },
+    {
+      "descricao": "Retry com backoff",
+      "atendido": true,
+      "comentario": "Corrigido: filtro do tenacity agora usa anthropic.APITimeoutError/APIConnectionError/RateLimitError (exceções reais do SDK) em vez de TimeoutError/ConnectionError builtin. Verificado com teste que simula APIConnectionError real."
+    },
+    {
+      "descricao": "Tratamento de erro real",
+      "atendido": true,
+      "comentario": "Arquivo inexistente e coluna ausente tratados sem stack trace, retorno de código de erro claro."
+    },
+    {
+      "descricao": "Testes sem dependência de rede",
+      "atendido": true,
+      "comentario": "pytest local: 6 passed (era 5, novo teste de retry incluído), chamada de LLM mockada via monkeypatch em _chamar_api_anthropic."
+    },
+    {
+      "descricao": "Script de avaliação funcional",
+      "atendido": true,
+      "comentario": "avaliar.py testado com dados sintéticos, acurácia calculada corretamente."
+    },
+    {
+      "descricao": "Reprodutibilidade",
+      "atendido": true,
+      "comentario": "README documenta venv, instalação, .env, execução do CLI e da avaliação."
+    },
+    {
+      "descricao": "Código legível",
+      "atendido": true,
+      "comentario": "Nomes claros, separação limpa entre CLI/cliente LLM/avaliação."
+    }
+  ],
+  "reviewed_at": "2026-09-20T19:05:00Z",
+  "commit_sha": "b977323155516a225572dbb19f9819fd9f0a15c4"
+}

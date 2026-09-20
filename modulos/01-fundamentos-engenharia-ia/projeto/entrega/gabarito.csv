@@ -1,0 +1,11 @@
+texto,classificacao_esperada
+"Adorei o atendimento, super rapido e resolveu meu problema",positivo
+"Produto quebrou no segundo dia de uso, pessimo",negativo
+"Chegou no prazo, nada de especial",neutro
+"O suporte demorou tres dias pra responder, muito ruim",negativo
+"Superou minhas expectativas, recomendo demais",positivo
+"Ta ok, cumpre o que promete",neutro
+"Nunca mais compro dessa marca, experiencia horrivel",negativo
+"Entrega rapida e produto igual ao anunciado",positivo
+"Cancelei porque o app trava toda hora",negativo
+"Achei o preco justo pelo que oferece",positivo
