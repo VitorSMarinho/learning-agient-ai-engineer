@@ -2,7 +2,7 @@
   "modulo_id": "ia-01-fundamentos-engenharia-ia",
   "pr_number": 2,
   "reviewer_agent": "python-reviewer",
-  "status": "precisa_ajuste",
+  "status": "aprovado",
   "criterios": [
     {
       "descricao": "Sem segredo hardcoded",
@@ -21,8 +21,8 @@
     },
     {
       "descricao": "Retry com backoff",
-      "atendido": false,
-      "comentario": "retry_if_exception_type usa TimeoutError/ConnectionError builtin, mas o SDK anthropic levanta APITimeoutError/APIConnectionError/RateLimitError — o retry nunca dispara em falha real de API."
+      "atendido": true,
+      "comentario": "Corrigido: filtro do tenacity agora usa anthropic.APITimeoutError/APIConnectionError/RateLimitError (exceções reais do SDK) em vez de TimeoutError/ConnectionError builtin. Verificado com teste que simula APIConnectionError real."
     },
     {
       "descricao": "Tratamento de erro real",
@@ -32,7 +32,7 @@
     {
       "descricao": "Testes sem dependência de rede",
       "atendido": true,
-      "comentario": "pytest local: 5 passed, chamada de LLM mockada via monkeypatch em _chamar_api_anthropic."
+      "comentario": "pytest local: 6 passed (era 5, novo teste de retry incluído), chamada de LLM mockada via monkeypatch em _chamar_api_anthropic."
     },
     {
       "descricao": "Script de avaliação funcional",
@@ -50,6 +50,6 @@
       "comentario": "Nomes claros, separação limpa entre CLI/cliente LLM/avaliação."
     }
   ],
-  "reviewed_at": "2026-09-20T18:56:00Z",
-  "commit_sha": "74f7a9b6728bda807fa7798b9f2d2f2eab5b0bf7"
+  "reviewed_at": "2026-09-20T19:05:00Z",
+  "commit_sha": "b977323155516a225572dbb19f9819fd9f0a15c4"
 }
