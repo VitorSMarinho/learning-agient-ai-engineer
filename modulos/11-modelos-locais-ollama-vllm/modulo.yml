@@ -3,6 +3,6 @@ trilha: ia
 ordem: 11
 titulo: "Modelos Locais (Ollama, vLLM)"
 reviewer_agent: engineering-ai-engineer
-status_projeto: a_detalhar
-projeto_path: null
-review_status_path: null
+status_projeto: completo
+projeto_path: projeto/
+review_status_path: reviews/11-modelos-locais-ollama-vllm.json
