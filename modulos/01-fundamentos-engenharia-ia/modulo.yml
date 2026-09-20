@@ -1,0 +1,8 @@
+id: ia-01-fundamentos-engenharia-ia
+trilha: ia
+ordem: 1
+titulo: "Fundamentos da Engenharia de IA"
+reviewer_agent: python-reviewer
+status_projeto: completo
+projeto_path: projeto/
+review_status_path: reviews/01-fundamentos-engenharia-ia.json
