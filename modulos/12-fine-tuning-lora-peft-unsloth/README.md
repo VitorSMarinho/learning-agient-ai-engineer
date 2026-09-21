@@ -10,20 +10,47 @@ a próxima ferramenta. Aqui você faz de verdade, não só lê sobre.
 
 Módulos 01, 02, 11 (já sabe servir modelo local).
 
-## Conceitos-chave
+## Fundamentos
 
-- Por que fine-tuning completo é caro/raro e LoRA/QLoRA resolve 90% dos casos com fração do
-  custo
-- PEFT (Parameter-Efficient Fine-Tuning): o que exatamente é treinado vs congelado
-- Preparação de dataset de fine-tuning (formato, tamanho mínimo viável, qualidade > quantidade)
-- Avaliação pré/pós fine-tuning no mesmo conjunto de teste — prova objetiva de que melhorou
+**Por que fine-tuning completo é raro.** Fine-tuning completo re-treina TODOS os parâmetros do
+modelo — pra um modelo de bilhões de parâmetros, isso exige memória de GPU proporcional ao
+tamanho do modelo inteiro, várias vezes (pesos, gradientes, estados do otimizador). É caro,
+lento, e arriscado (pode degradar capacidades gerais do modelo — "esquecimento catastrófico").
+LoRA (Low-Rank Adaptation) resolve isso treinando só um número pequeno de parâmetros extras
+(matrizes de baixo rank injetadas em camadas específicas) e mantendo o modelo original congelado
+— resultado próximo do fine-tuning completo, com uma fração do custo computacional e memória.
 
-## Recursos gratuitos
+**PEFT: o que é treinado vs congelado.** PEFT é a categoria geral de técnicas que treinam só uma
+fatia pequena dos parâmetros (LoRA é a mais comum, mas não a única). O modelo base fica
+congelado — nenhum peso dele muda. O que é treinado são as camadas extras adicionadas. Isso tem
+uma consequência prática boa: você pode ter vários "adapters" LoRA diferentes (um por tarefa)
+compartilhando o mesmo modelo base congelado, e trocar entre eles sem recarregar o modelo
+inteiro.
 
-- [Hugging Face — PEFT documentação oficial](https://huggingface.co/docs/peft/index)
-- [Unsloth — documentação e notebooks oficiais gratuitos](https://docs.unsloth.ai/) (fine-tuning otimizado, roda em GPU gratuita do Google Colab)
-- [Hugging Face — LoRA conceitos (documentação oficial)](https://huggingface.co/docs/peft/conceptual_guides/lora)
-- [Google Colab](https://colab.research.google.com/) (GPU gratuita pra rodar o treino)
+**Preparação de dataset.** Fine-tuning não corrige um modelo ruim com dado ruim — o princípio é
+"qualidade > quantidade" de forma bem mais extrema aqui do que em treino do zero. Um dataset
+pequeno (dezenas a poucas centenas de exemplos) mas consistente, bem formatado, e representativo
+do padrão exato que você quer ensinar geralmente supera um dataset grande e ruidoso. Formato
+importa: os exemplos precisam seguir exatamente a estrutura de prompt/resposta que o modelo vai
+usar em produção.
+
+**Avaliação pré/pós.** Sem medir o modelo ANTES do fine-tuning no mesmo conjunto de teste que
+você vai usar DEPOIS, você não tem prova de que o treino ajudou — só a impressão de que ajudou.
+Essa avaliação também precisa ser honesta o suficiente pra revelar quando o fine-tuning NÃO
+melhorou (dataset pequeno demais, tarefa mal definida, overfitting nos exemplos de treino) — que
+é um resultado tão válido de documentar quanto "melhorou".
+
+## Documentação de referência
+
+- [Unsloth — documentação e notebooks oficiais](https://docs.unsloth.ai/) — o caminho mais
+  direto pra rodar fine-tuning LoRA de verdade na GPU gratuita do Colab; comece pelos notebooks
+  prontos antes de customizar.
+- [Hugging Face — PEFT (documentação oficial)](https://huggingface.co/docs/peft/index) — a
+  biblioteca por trás da maioria das implementações de LoRA em Python.
+- [Hugging Face — LoRA (guia conceitual oficial)](https://huggingface.co/docs/peft/conceptual_guides/lora) —
+  explica a matemática de baixo rank de forma acessível, sem precisar do paper original.
+- [Google Colab](https://colab.research.google.com/) — onde você roda o treino, GPU gratuita
+  (com limite de tempo/cota, mas suficiente pro escopo deste projeto).
 
 ## O que você vai construir
 
