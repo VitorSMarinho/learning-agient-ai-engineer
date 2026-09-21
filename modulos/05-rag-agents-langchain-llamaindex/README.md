@@ -10,19 +10,42 @@ compara os dois frameworks dominantes construindo o mesmo agente nos dois.
 
 Módulo 04.
 
-## Conceitos-chave
+## Fundamentos
 
-- Query transformation e decomposição de pergunta complexa em sub-perguntas
-- Tool-calling aplicado à recuperação (o agente escolhe a fonte/ferramenta certa)
-- Roteamento entre múltiplos índices/fontes
-- Onde LangChain (LCEL, mais controle explícito) e LlamaIndex (abstrações de índice/query engine
-  mais prontas) cada um vence, na prática, não em marketing
+**Query transformation e decomposição.** Uma pergunta complexa do usuário raramente casa bem
+com uma única busca vetorial. Query transformation reescreve a pergunta original numa (ou
+várias) mais fáceis de recuperar — por exemplo, decompondo "compare X e Y" em "busca sobre X" +
+"busca sobre Y" separadas, e só depois juntando os resultados na geração. Isso recupera melhor
+do que jogar a pergunta composta inteira direto no índice.
 
-## Recursos gratuitos
+**Tool-calling aplicado à recuperação.** Em vez de sempre buscar do mesmo jeito, um agente com
+tool-calling decide, pergunta a pergunta, qual ferramenta de busca usar (banco vetorial A,
+banco B, busca web, SQL direto) e com qual query. Isso transforma "RAG" de um pipeline fixo pra
+uma decisão dinâmica — o custo é que agora o comportamento depende do modelo escolher a
+ferramenta certa, o que precisa ser testado, não assumido.
+
+**Roteamento entre múltiplos índices.** Quando existe mais de uma fonte de dado (documentação
+técnica, base de FAQ, base de código), roteamento decide qual índice consultar antes de gastar
+uma chamada de busca — seja por classificação da pergunta, seja deixando o próprio agente
+escolher via tool-calling. Buscar no índice errado custa tempo e pode trazer contexto irrelevante
+que confunde a geração.
+
+**LangChain vs. LlamaIndex: onde cada um vence na prática.** LangChain (via LCEL) dá controle
+explícito sobre cada etapa do pipeline — mais código, mais visibilidade do que está acontecendo
+em cada passo. LlamaIndex oferece abstrações de índice/query engine mais prontas — menos código
+pra um caso comum, menos controle fino quando o caso foge do padrão. Nenhum dos dois é
+estritamente melhor; a escolha certa depende de quanto controle o seu caso de uso exige.
+
+## Documentação de referência
 
 - [LangChain — Agents documentação oficial](https://python.langchain.com/docs/concepts/agents/)
+  — conceitos de agente no ecossistema LangChain, base pra metade do exercício.
 - [LlamaIndex — Agents documentação oficial](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/)
-- [LangGraph — documentação oficial](https://langchain-ai.github.io/langgraph/) (usado como runtime de agente em ambos os ecossistemas hoje)
+  — o mesmo conceito, abstrações diferentes; compare a quantidade de código pra fazer a mesma
+  coisa.
+- [LangGraph — documentação oficial](https://langchain-ai.github.io/langgraph/) — runtime de
+  agente usado hoje em ambos os ecossistemas; vale entender antes do Módulo 08, que aprofunda
+  nele.
 
 ## O que você vai construir
 
