@@ -57,6 +57,7 @@ provar que o sistema não trava/quebra silenciosamente.
 
 ## Como é avaliado
 
-Este módulo ainda não tem projeto prático detalhado. Quando tiver, será resolvido e submetido
-via PR neste repo, revisado pela skill `revisar-modulo-agient` usando o subagente
-`engineering-multi-agent-systems-architect`.
+Ao abrir o PR com a solução neste repo, rode a skill `revisar-modulo-agient`. Ela
+aciona o subagente `engineering-multi-agent-systems-architect` sobre o diff, usando `projeto/CRITERIOS_ACEITE.md`
+como rubrica, posta o resultado como comentário no PR e grava
+`reviews/09-multi-agent-systems.json`.

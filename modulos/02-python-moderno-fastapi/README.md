@@ -64,6 +64,7 @@ pra falha do provedor), e testes com `TestClient`.
 
 ## Como é avaliado
 
-Este módulo ainda não tem projeto prático detalhado. Quando tiver, será resolvido e submetido
-via PR neste repo, revisado pela skill `revisar-modulo-agient` usando o subagente
-`fastapi-reviewer`.
+Ao abrir o PR com a solução neste repo, rode a skill `revisar-modulo-agient`. Ela
+aciona o subagente `fastapi-reviewer` sobre o diff, usando `projeto/CRITERIOS_ACEITE.md`
+como rubrica, posta o resultado como comentário no PR e grava
+`reviews/02-python-moderno-fastapi.json`.
